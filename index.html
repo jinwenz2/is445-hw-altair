@@ -1,44 +1,71 @@
----
-layout: default
-title: UFO Visualization
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>UFO Sightings Visualization</title>
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      max-width: 900px;
+    }
+    h1, h2 {
+      color: #2c3e50;
+    }
+    .button-links {
+      margin-top: 20px;
+    }
+    .button-links a {
+      display: inline-block;
+      margin-right: 20px;
+      margin-bottom: 10px;
+      padding: 10px 15px;
+      background-color: #3498db;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+    }
+    .button-links a:hover {
+      background-color: #2980b9;
+    }
+  </style>
+</head>
+<body>
 
-## UFO Sightings Over the Years
+  <h1>UFO Sightings: Interactive Visualizations</h1>
 
-<div id="vis1"></div>
+  <h2>UFO Sightings Over the Years</h2>
+  <div id="vis1"></div>
+  <p>
+    This line chart visualizes the number of UFO sightings reported in the United States each year, as recorded in the dataset from the early 1900s to 2014.
+    For the visual encoding, the x-axis represents the year (discrete), and the y-axis encodes the count of reports per year (quantitative). I used a line chart with point markers to emphasize trends and highlight each year's data clearly.
+    In terms of data transformation, I first converted the original datetime field into a datetime object using pd.to_datetime(), and then extracted the year with dt.year to group the data.
+    "This plot was not included in my Homework #5 submission." It is newly created for this assignment using Altair and JSON export for embedding in the Jekyll site.
+    I used a tooltip interactivity so that viewers can hover over each point and see the exact year and number of reports. This enhances readability and makes it easy to spot peak years.
+  </p>
 
-<p>
-  This line chart visualizes the number of UFO sightings reported in the United States each year, as recorded in the dataset from the early 1900s to 2014.
-  For the visual encoding, the x-axis represents the year (discrete), and the y-axis encodes the count of reports per year (quantitative). I used a line chart with point markers to emphasize trends and highlight each year's data clearly.
-  In terms of data transformation, I first converted the original datetime field into a datetime object using pd.to_datetime(), and then extracted the year with dt.year to group the data.
-  "This plot was not included in my Homework #5 submission." It is newly created for this assignment using Altair and JSON export for embedding in the Jekyll site.
-  I used a tooltip interactivity so that viewers can hover over each point and see the exact year and number of reports. This enhances readability and makes it easy to spot peak years.
-</p>
+  <h2>UFO Shape Distribution by State</h2>
+  <div id="vis2"></div>
+  <p>
+    This bar chart shows the distribution of reported UFO shapes for a selected U.S. state, limited to the top 20 states by total number of reports.
+    The x-axis encodes the shape of the reported object, and the y-axis shows the total number of reports for that shape. Color is also mapped to the shape to help distinguish the bars. I sorted the shapes by descending count for easier comparison.
+    For the data transformation, I first filtered the dataset to include only U.S. states and then selected the top 20 by frequency. I used this filtered dataset to populate the dropdown and generate the chart.
+    "This plot was not part of my Homework #5 submission." It was created specifically for this assignment to fulfill the requirement for interactivity and web integration.
+    I implemented interactive filtering using a dropdown menu, allowing the user to choose a state and dynamically update the bar chart based on that selection. This makes the chart more useful for comparison and allows for localized analysis without cluttering the screen.
+  </p>
 
+  <div class="button-links">
+    <a href="Workbook.ipynb" target="_blank">📓 The Analysis</a>
+    <a href="https://github.com/UIUC-iSchool-DataViz/is445_data/raw/main/ufo-scrubbed-geocoded-time-standardized-00.csv" target="_blank">📂 The Data</a>
+  </div>
 
-## UFO Shape Distribution by State
+  <script type="text/javascript">
+    vegaEmbed('#vis1', 'chart1.json');
+    vegaEmbed('#vis2', 'chart2.json');
+  </script>
 
-<div id="vis2"></div>
-
-<p>
-  This bar chart shows the distribution of reported UFO shapes for a selected U.S. state, limited to the top 20 states by total number of reports.
-  The x-axis encodes the shape of the reported object, and the y-axis shows the total number of reports for that shape. Color is also mapped to the shape to help distinguish the bars. I sorted the shapes by descending count for easier comparison.
-  For the data transformation, I first filtered the dataset to include only U.S. states and then selected the top 20 by frequency. I used this filtered dataset to populate the dropdown and generate the chart.
-  "This plot was not part of my Homework #5 submission." It was created specifically for this assignment to fulfill the requirement for interactivity and web integration.
-  I implemented interactive filtering using a dropdown menu, allowing the user to choose a state and dynamically update the bar chart based on that selection. This makes the chart more useful for comparison and allows for localized analysis without cluttering the screen.
-</p>
-
-
-## Links
-
-- 📓 [The Analysis (Notebook)](Workbook.ipynb)
-- 📂 [The Data](https://github.com/UIUC-iSchool-DataViz/is445_data/raw/main/ufo-scrubbed-geocoded-time-standardized-00.csv)
-
-<script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
-<script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
-<script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
-
-<script type="text/javascript">
-  vegaEmbed('#vis1', 'chart1.json');
-  vegaEmbed('#vis2', 'chart2.json');
-</script>
+</body>
+</html>
